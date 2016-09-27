@@ -3,22 +3,29 @@
 int main() {
 	BinarySearchTree<int> Tree({ 11, 12, 15, 9 });
 	auto a = 8;
-	Tree.add(a);
+	Tree.Insert(a);
 
 	std::ofstream file("C:/Users/sayfer/Desktop/BinarySearchTree.txt");
 	file << Tree;
 	file.close();
-	
-	std::cout << Tree;
-	std::cout << std::endl;
-	
-	BinarySearchTree<int> Tree2(std::move(Tree));
-	std::cout << Tree2;
-	std::cout << std::endl;
 
-	Tree = std::move(Tree2);
-	std::cout << Tree;
+	std::cin >> Tree;
+	std::cout << Tree << std::endl;
+
+	std::ifstream file2("C:/Users/sayfer/Desktop/BinarySearchTree.txt");
+	BinarySearchTree<int> Tree2;
+	file2 >> Tree2;
+	file.close();
+	std::cout << Tree2 << std::endl;
+
+	BinarySearchTree<int> Tree3(std::move(Tree));
+	std::cout << Tree3 << std::endl;
+
+	Tree = Tree3;
+	std::cout << Tree << std::endl;
 	
+	std::cout << (Tree == Tree2) << std::endl;
+
 	system("pause");
 	return 0;
 }
