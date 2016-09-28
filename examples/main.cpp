@@ -2,7 +2,7 @@
 
 int main() {
 	BinarySearchTree<int> Tree({ 11, 12, 15, 9 });
-	/*auto a = 8;
+	auto a = 8;
 	Tree.Insert(a);
 
 	std::ofstream file("C:/Users/sayfer/Desktop/BinarySearchTree.txt");
@@ -26,7 +26,5 @@ int main() {
 	
 	std::cout << (Tree == Tree2) << std::endl;
 
-	system("pause");
-	*/
 	return 0;
 }
