@@ -1,6 +1,6 @@
 
 
-#include "../tests/catch.h"
+#include "../tests/catch.hpp"
 #include "../include/BinarySearchTree.h"
 
 SCENARIO ("Size of empty tree") {
