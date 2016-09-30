@@ -1,7 +1,7 @@
 
 
-#include "Catch.h"
-#include "BinarySearchTree.h"
+#include "../tests/Catch.h"
+#include "../include/BinarySearchTree.h"
 
 SCENARIO ("Size of empty tree") {
     GIVEN("Given empty tree") {
