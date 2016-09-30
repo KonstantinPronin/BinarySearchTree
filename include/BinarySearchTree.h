@@ -47,6 +47,7 @@ public:
 	void Direct(std::ostream& out, Node* root) const noexcept;
 	void Symmetric(std::ostream& out, Node* root) const noexcept;
 	void Copy(Node* ptr) noexcept;
+	size_t size() const {return Size;}
 	bool Compare(Node* ptr1, Node* ptr2) const noexcept;
 	Node* ReturnRoot() const noexcept {return Root;}
 	
