@@ -1,11 +1,13 @@
 #include "../include/BinarySearchTree.h"
 
+
 int main() {
-	BinarySearchTree<int> Tree({ 11, 12, 15, 9 });
+	BinarySearchTree<int> Tree{ 11, 12, 15, 9 };
 	auto a = 8;
 	Tree.Insert(a);
 
 	std::ofstream file("C:/Users/sayfer/Desktop/BinarySearchTree.txt");
+
 	file << Tree;
 	file.close();
 
@@ -15,7 +17,6 @@ int main() {
 	std::ifstream file2("C:/Users/sayfer/Desktop/BinarySearchTree.txt");
 	BinarySearchTree<int> Tree2;
 	file2 >> Tree2;
-	file.close();
 	std::cout << Tree2 << std::endl;
 
 	BinarySearchTree<int> Tree3(std::move(Tree));
@@ -26,5 +27,6 @@ int main() {
 	
 	std::cout << (Tree == Tree2) << std::endl;
 
+	system("pause");
 	return 0;
 }
