@@ -46,12 +46,12 @@ public:
 	const T* Find(const T& val) const noexcept;
 	void Direct(std::ostream& out, Node* root) const noexcept;
 	void Symmetric(std::ostream& out, Node* root) const noexcept;
-	void Copy(Node* ptr) noexcept;
-	size_t size() const {return Size;}
+	void Copy(Node* root, Node* ptr) noexcept;
 	bool Compare(Node* ptr1, Node* ptr2) const noexcept;
 	Node* ReturnRoot() const noexcept {return Root;}
 	
 	BinarySearchTree<T>& operator= (const BinarySearchTree<T>& tree) noexcept;
+	// изменить цикл копирования не через инсерт, оптимальнее! чтобы не проходить каждый раз полностью дерево 
 	BinarySearchTree<T>& operator= (BinarySearchTree<T>&& tree) noexcept;
 	bool operator== (const BinarySearchTree<T>& tree) const noexcept;
 };
@@ -71,6 +71,7 @@ BinarySearchTree<T>::BinarySearchTree(const BinarySearchTree<T>& tree){
 template <typename T>
 BinarySearchTree<T>::BinarySearchTree(BinarySearchTree<T>&& tree):Size(tree.Size), Root(tree.Root){
 	tree.Root = nullptr;
+	tree.Size = 0;
 }
 
 template <typename T>
@@ -114,20 +115,45 @@ const T* BinarySearchTree<T>::Find(const T& val) const noexcept {
 }
 
 template <typename T>
-void BinarySearchTree<T>::Copy(Node* ptr) noexcept {
-	Insert(ptr->value);
-	if (ptr->left) Copy(ptr->left);
-	if (ptr->right) Copy(ptr->right);
+void BinarySearchTree<T>::Copy(Node* root, Node* ptr) noexcept {
+	if (!root && ptr) { 
+		Insert(ptr->value); 
+		Copy(Root, ptr);
+		return;
+	}
+	if (!ptr) {
+		Root = nullptr;
+		return;
+	}
+	if (ptr->value != root->value) root->value = ptr->value;
+	if (root->left && !ptr->left) { 
+		delete root->left; 
+		root->left = nullptr;
+	}
+	if (root->right && !ptr->right) {
+		delete root->right;
+		root->right = nullptr;
+	}
+	if (ptr->left && !root->left) {
+		root->left = new Node(ptr->left->value);
+		Size++;
+	}
+	if (ptr->right && !root->right) {
+		root->right = new Node(ptr->right->value);
+		Size++;
+	}
+	if (ptr->right && root->right)
+		Copy(root->right, ptr->right);
+	if (ptr->left && root->left)
+		Copy(root->left, ptr->left);
+
 }
 
 template <typename T>
 BinarySearchTree<T>& BinarySearchTree<T>::operator= (const BinarySearchTree<T>& tree) noexcept {
 	if (this == &tree)
 		return *this;
-	
-	delete Root;
-	Size = 0;
-	Copy(tree.Root);
+	Copy(Root, tree.Root);
 	return *this;
 }
 
@@ -136,9 +162,9 @@ BinarySearchTree<T>& BinarySearchTree<T>::operator= (BinarySearchTree<T>&& tree)
 	if (this == &tree)
 		return *this;
 
-	delete Root;
-	Size = tree.Size;
-	Root = tree.Root;
+	delete this->Root;
+	this->Size = tree.Size;
+	this->Root = tree.Root;
 	tree.Root = nullptr;
 
 	return *this;
