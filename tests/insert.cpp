@@ -33,3 +33,36 @@ SCENARIO("If inserting element does not exist in tree")
       }
    }
 }
+
+SCENARIO("If inserting element < rott")
+{
+   GIVEN("Tree with non-existing element")
+   {
+      BinarySearchTree<int> tree1 { 8,10,3};
+      BinarySearchTree<int> tree2 { 8, 10, 3, 7};
+      WHEN("Inserting")
+      {
+         THEN("Inserted left from root")
+         {
+            REQUIRE(tree1 == tree2)
+         }
+      }
+   }
+}
+
+SCENARIO("If inserting element > root")
+{
+   GIVEN("Tree with non-existing element")
+   {
+      BinarySearchTree<int> tree1 {8,10,3};
+      BinarySearchTree<int> tree2 { 8, 10, 3, 9};
+      WHEN("Inserting")
+      {
+         THEN("Inserted right from root")
+         {
+            REQUIRE(tree1 == tree2)
+         }
+      }
+   }
+}
+
