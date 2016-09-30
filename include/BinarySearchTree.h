@@ -49,6 +49,7 @@ public:
 	void Copy(Node* root, Node* ptr) noexcept;
 	bool Compare(Node* ptr1, Node* ptr2) const noexcept;
 	Node* ReturnRoot() const noexcept {return Root;}
+	size_t size() const {return Size;}
 	
 	BinarySearchTree<T>& operator= (const BinarySearchTree<T>& tree) noexcept;
 	// изменить цикл копирования не через инсерт, оптимальнее! чтобы не проходить каждый раз полностью дерево 
