@@ -43,7 +43,7 @@ SCENARIO("Size of empty const tree"){
 
 SCENARIO("Size of not empty const tree"){
     GIVEN("Given const not empty tree") {
-        const BinarySearchTree<int> tree;
+        const BinarySearchTree<int> tree{11, 14, 10};
 
         WHEN ("Decide size") {
             THEN ("Size mustn`t be empty") {
