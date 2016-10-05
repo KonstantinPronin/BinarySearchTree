@@ -7,7 +7,7 @@ SCENARIO("Find existing element"){
         BinarySearchTree<int> tree{11, 14, 16, 18};
         WHEN("Element exist"){
             THEN("Find it") {
-              REQUIRES (*(tree.find(11)) == 11)
+              REQUIRES (*(tree.find(11)) == 11);
             }
         }
 
@@ -19,7 +19,7 @@ SCENARIO("Find not existing element"){
         BinarySearchTree<int> tree{11, 14, 16, 18};
         WHEN("Element doesnt exist"){
             THEN("Wont find it") {
-              REQUIRES (tree.find (10) == nullptr)
+              REQUIRES (tree.find (10) == nullptr);
             }
         }
 
@@ -31,7 +31,7 @@ SCENARIO("Find existing element"){
         const BinarySearchTree<int> tree{11, 14, 16, 18};
         WHEN("Element exist"){
             THEN("Find it") {
-              REQUIRES (*(tree.find (11)) == 11)
+              REQUIRES (*(tree.find (11)) == 11);
             }
         }
 
@@ -43,7 +43,7 @@ SCENARIO("Find not existing element"){
         const BinarySearchTree<int> tree{11, 14, 16, 18};
         WHEN("Element doesnt exist"){
             THEN("Wont find it") {
-              REQUIRES (tree.find (10) == nullptr)
+              REQUIRES (tree.find (10) == nullptr);
             }
         }
 
