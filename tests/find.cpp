@@ -26,7 +26,7 @@ SCENARIO("Find not existing element"){
     }
 }
 
-SCENARIO("Find existing element"){
+SCENARIO("Find const existing element"){
     GIVEN("Tree with element"){
         const BinarySearchTree<int> tree{11, 14, 16, 18};
         WHEN("Element exist"){
@@ -38,7 +38,7 @@ SCENARIO("Find existing element"){
     }
 }
 
-SCENARIO("Find not existing element"){
+SCENARIO("Find const not existing element"){
     GIVEN("Tree without element"){
         const BinarySearchTree<int> tree{11, 14, 16, 18};
         WHEN("Element doesnt exist"){
