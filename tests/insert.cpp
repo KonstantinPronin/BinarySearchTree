@@ -12,7 +12,7 @@ SCENARIO("If inserting element already exist in tree")
          THEN("Method must return false and doent change size")
          {
             REQUIRE(tree.Insert(10) == false);
-            REQUIRE(tree.size() == 3)
+            REQUIRE(tree.size() == 3);
          }
       }
    }
@@ -28,7 +28,7 @@ SCENARIO("If inserting element does not exist in tree")
          THEN("Method must return true and change size")
          {
             REQUIRE(tree.Insert(7) == true);
-            REQUIRE(tree.size() == 4)
+            REQUIRE(tree.size() == 4);
          }
       }
    }
@@ -44,7 +44,7 @@ SCENARIO("If inserting element < rott")
       {
          THEN("Inserted left from root")
          {
-            REQUIRE(tree1 == tree2)
+            REQUIRE(tree1 == tree2);
          }
       }
    }
@@ -60,7 +60,7 @@ SCENARIO("If inserting element > root")
       {
          THEN("Inserted right from root")
          {
-            REQUIRE(tree1 == tree2)
+            REQUIRE(tree1 == tree2);
          }
       }
    }
