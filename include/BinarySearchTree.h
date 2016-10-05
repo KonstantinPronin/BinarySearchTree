@@ -52,13 +52,12 @@ public:
 	size_t size() const {return Size;}
 	
 	BinarySearchTree<T>& operator= (const BinarySearchTree<T>& tree) noexcept;
-	// изменить цикл копирования не через инсерт, оптимальнее! чтобы не проходить каждый раз полностью дерево 
 	BinarySearchTree<T>& operator= (BinarySearchTree<T>&& tree) noexcept;
 	bool operator== (const BinarySearchTree<T>& tree) const noexcept;
 };
 
 template <typename T>
-BinarySearchTree<T>::BinarySearchTree(const std::initializer_list<T>& list){
+BinarySearchTree<T>::BinarySearchTree(const std::initializer_list<T>& list):Size(0), Root(nullptr){
 	for (auto it : list) {
 		Insert(it);
 	}
