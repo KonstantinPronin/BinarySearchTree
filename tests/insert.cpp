@@ -65,7 +65,7 @@ SCENARIO("If inserting element > root")
          THEN("Inserted right from root")
          {
             int a = 9;
-            tree.Insert(a);
+            tree1.Insert(a);
             REQUIRE(tree1 == tree2);
          }
       }
