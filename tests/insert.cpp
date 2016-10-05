@@ -11,7 +11,7 @@ SCENARIO("If inserting element already exist in tree")
       {
          THEN("Method must return false and doent change size")
          {
-            REQUIRE(tree.insert(10) == false);
+            REQUIRE(tree.Insert(10) == false);
             REQUIRE(tree.size() == 3)
          }
       }
@@ -27,7 +27,7 @@ SCENARIO("If inserting element does not exist in tree")
       {
          THEN("Method must return true and change size")
          {
-            REQUIRE(tree.insert(7) == true);
+            REQUIRE(tree.Insert(7) == true);
             REQUIRE(tree.size() == 4)
          }
       }
