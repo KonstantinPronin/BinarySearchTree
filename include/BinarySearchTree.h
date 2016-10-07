@@ -124,39 +124,33 @@ bool BinarySearchTree<T>::Remove(const T& value, std::shared_ptr<Node> ptr) noex
         Remove(value, ptr->right);
     if (value < ptr->value)
         Remove(value, ptr->left);
-
-    if (!ptr->right && !ptr->left) {
-        ptr = nullptr;
-        Size--;
-        return true;
-    }
-    if (ptr->left && !ptr->right){
-        ptr = ptr->left;
-        Size--;
-        return true;
-    }
-    if (!ptr->left && ptr->right){
-        ptr = ptr->right;
-        Size--;
-        return true;
-    }
-    if (!ptr->right->left) {
-        auto LeftSide = ptr->left;
-        ptr = ptr->right;
-        ptr->left = LeftSide;
-        Size--;
-        return true;
-    }
+    
     else{
-        auto bottom = ptr->right;
-        while (bottom)
-            bottom = bottom->left;
-        bottom = ptr->left;
-        ptr = ptr->right;
-        Size--;
+    	if (!ptr->right && !ptr->left) {
+        	ptr = nullptr;
+        }
+    	if (ptr->left && !ptr->right){
+        	ptr = ptr->left;
+    	}
+    	if (!ptr->left && ptr->right){
+        	ptr = ptr->right;
+        }
+    	if (!ptr->right->left) {
+        	auto LeftSide = ptr->left;
+        	ptr = ptr->right;
+        	ptr->left = LeftSide;
+        }
+    	else{
+        	auto bottom = ptr->right;
+        	while (bottom)
+            	bottom = bottom->left;
+        	bottom = ptr->left;
+        	ptr = ptr->right;
+        }
+    	Size--;
         return true;
+    	
     }
-
 }
 
 
