@@ -48,6 +48,7 @@ public:
 	void Symmetric(std::ostream& out, Node* root) const noexcept;
 	void Copy(Node* root, Node* ptr) noexcept;
 	bool Compare(Node* ptr1, Node* ptr2) const noexcept;
+	bool Remove(const T& value, std::shared_ptr<Node> ptr) noexcept;
 	Node* ReturnRoot() const noexcept {return Root;}
 	size_t size() const {return Size;}
 	
@@ -113,6 +114,50 @@ const T* BinarySearchTree<T>::Find(const T& val) const noexcept {
 	}
 	return nullptr;
 }
+
+template <typename T>
+bool BinarySearchTree<T>::Remove(const T& value, std::shared_ptr<Node> ptr) noexcept{
+
+    if (!ptr) return false;
+    if (value > ptr->value)
+        Remove(value, ptr->right);
+    if (value < ptr->value)
+        Remove(value, ptr->left);
+
+    if (!ptr->right && !ptr->left) {
+        ptr = nullptr;
+        Size--;
+        return true;
+    }
+    if (ptr->left && !ptr->right){
+        ptr = ptr->left;
+        Size--;
+        return true;
+    }
+    if (!ptr->left && ptr->right){
+        ptr = ptr->right;
+        Size--;
+        return true;
+    }
+    if (!ptr->right->left) {
+        auto LeftSide = ptr->left;
+        ptr = ptr->right;
+        ptr->left = LeftSide;
+        Size--;
+        return true;
+    }
+    else{
+        auto bottom = ptr->right;
+        while (bottom)
+            bottom = bottom->left;
+        bottom = ptr->left;
+        ptr = ptr->right;
+        Size--;
+        return true;
+    }
+
+}
+
 
 template <typename T>
 void BinarySearchTree<T>::Copy(Node* root, Node* ptr) noexcept {
