@@ -118,7 +118,7 @@ std::shared_ptr<T> BinarySearchTree<T>::Find(const T& val) const noexcept {
             tmp = tmp->left;
         else if (tmp->value < val)
             tmp = tmp->right;
-        else return std::shared_ptr<T> (tmp->value);
+        else return std::shared_ptr<T> (&tmp->value);
     }
     return nullptr;
 }
@@ -251,19 +251,12 @@ bool BinarySearchTree<T>::Remove(const T& value, std::shared_ptr<Node>& ptr) noe
             auto LeftSide = ptr->left;
             ptr = ptr->right;
             ptr->left = LeftSide;
-            //ptr->value = ptr->right->value;
-            //ptr->right = ptr->right->right;
         } else {
             auto bottom = ptr->right;
-            //auto LeftSide = ptr->left;
-
-            //ptr->value = ptr->right->value;
-            //ptr->right = ptr->right->right;
             while (bottom)
                 bottom = bottom->left;
             bottom = ptr->left;
             ptr = ptr->right;
-            //ptr->left = ptr->right->left;
         }
         Size--;
         return true;
