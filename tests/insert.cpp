@@ -13,7 +13,7 @@ SCENARIO("If inserting element already exist in tree")
          {  
             int a(10);
             REQUIRE(tree.Insert(a) == false);
-            REQUIRE(tree.size() == 3);
+            REQUIRE(tree.ReturnSize() == 3);
          }
       }
    }
@@ -30,7 +30,7 @@ SCENARIO("If inserting element does not exist in tree")
          {
             int a = 7;
             REQUIRE(tree.Insert(a) == true);
-            REQUIRE(tree.size() == 4);
+            REQUIRE(tree.ReturnSize() == 4);
          }
       }
    }
