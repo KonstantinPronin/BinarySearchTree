@@ -21,7 +21,7 @@ SCENARIO("Size of tree with some itemps"){
 
         WHEN ("Decide size") {
             THEN ("Size mustn`t be empty") {
-                REQUIRE(tree.size() != 0);
+                REQUIRE(tree.ReturnSize() != 0);
             }
         }
     }
@@ -34,7 +34,7 @@ SCENARIO("Size of empty const tree"){
 
         WHEN ("Decide size") {
             THEN ("Size must be empty") {
-                REQUIRE(tree.size() == 0);
+                REQUIRE(tree.ReturnSize() == 0);
             }
         }
     }
@@ -47,7 +47,7 @@ SCENARIO("Size of not empty const tree"){
 
         WHEN ("Decide size") {
             THEN ("Size mustn`t be empty") {
-                REQUIRE(tree.size() != 0);
+                REQUIRE(tree.ReturnSize() != 0);
             }
         }
     }
