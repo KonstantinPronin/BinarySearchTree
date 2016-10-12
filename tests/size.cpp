@@ -9,7 +9,7 @@ SCENARIO ("Size of empty tree") {
 
        WHEN ("Decide size") {
             THEN ("Size must be empty") {
-                REQUIRE(tree.size() == 0);
+                REQUIRE(tree.ReturnSize() == 0);
             }
         }
     }
