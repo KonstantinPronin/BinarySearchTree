@@ -118,7 +118,7 @@ std::shared_ptr<T> BinarySearchTree<T>::Find(const T& val) const noexcept {
             tmp = tmp->left;
         else if (tmp->value < val)
             tmp = tmp->right;
-        else return std::shared_ptr<T> (&tmp->value);
+        else return std::make_shared<T> (tmp->value);
     }
     return nullptr;
 }
