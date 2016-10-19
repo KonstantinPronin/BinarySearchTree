@@ -62,8 +62,8 @@ SCENARIO ("Changing the tree")
     }
     WHEN ("There is no such element"){
       BinarySearchTree<int> tree{11, 12, 15, 9, 10, 14, 17, 13};
-      THEN ("Return value is false"){
-       REQUIRE(tree.Remove(5) == false);
+      THEN ("Function must throw exception"){
+       REQUIRE_THROWS_AS(tree.Remove(5), BST_logic_error<int>&);
       }
     }
   }
