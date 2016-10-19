@@ -19,7 +19,7 @@ SCENARIO("Find not existing element"){
         BinarySearchTree<int> tree{11, 14, 16, 18};
         WHEN("Element doesnt exist"){
             THEN("Wont find it") {
-              REQUIRE (tree.Find (10) == nullptr);
+              REQUIRE_THROWS_AS (tree.Find (10), BST_logic_error<int>&);
             }
         }
 
@@ -43,7 +43,7 @@ SCENARIO("Find const not existing element"){
         const BinarySearchTree<int> tree{11, 14, 16, 18};
         WHEN("Element doesnt exist"){
             THEN("Wont find it") {
-              REQUIRE (tree.Find (10) == nullptr);
+              REQUIRE_THROWS_AS (tree.Find (10), BST_logic_error<int>&);
             }
         }
 
