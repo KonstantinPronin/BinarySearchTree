@@ -9,11 +9,11 @@ SCENARIO("If inserting element already exist in tree")
       BinarySearchTree<int> tree {8,10,3};
       WHEN("Inserting")
       {
-         THEN("Method must return false and doent change size")
+         THEN("Method must throw exception")
          {  
-            int a(10);
-            REQUIRE(tree.Insert(a) == false);
-            REQUIRE(tree.ReturnSize() == 3);
+            
+            REQUIRE_THROWS_AS (tree.Insert (10), BST_logic_error<int>&);
+   
          }
       }
    }
