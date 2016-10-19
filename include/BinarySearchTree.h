@@ -8,7 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
-#include "../exception/BSTException.h"
+#include "../include/BSTException.h"
 
 template <typename T>
 class BinarySearchTree;
