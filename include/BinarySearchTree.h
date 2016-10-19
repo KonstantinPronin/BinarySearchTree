@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <memory>
+#include "../exception/BSTException.h"
 
 template <typename T>
 class BinarySearchTree;
@@ -48,7 +49,7 @@ public:
     BinarySearchTree(BinarySearchTree<T>&& tree);
     ~BinarySearchTree();
 
-    bool Insert(T& val) noexcept;
+    bool Insert(const T& val);
     bool Compare(std::shared_ptr<Node> ptr1, std::shared_ptr<Node> ptr2) const noexcept;
     bool Remove(const T& value, std::shared_ptr<Node>& ptr) noexcept;
     bool Remove(const T& value) noexcept;
@@ -67,6 +68,7 @@ public:
     bool operator== (const BinarySearchTree<T>& tree) const noexcept;
 };
 
+
 template <typename T>
 BinarySearchTree<T>::BinarySearchTree(const std::initializer_list<T>& list):Size(0), Root(nullptr){
     for (auto it : list)
@@ -84,7 +86,7 @@ BinarySearchTree<T>::BinarySearchTree(BinarySearchTree<T>&& tree):Size(tree.Size
 }
 
 template <typename T>
-bool BinarySearchTree<T>::Insert(T& val) noexcept {
+bool BinarySearchTree<T>::Insert(const T& val)  {
     if (!Size) {
         Root = std::make_shared <Node> (val);
         Size++;
@@ -100,7 +102,7 @@ bool BinarySearchTree<T>::Insert(T& val) noexcept {
         else if (CurPtr->value < val)
             CurPtr = CurPtr->right;
         else if (CurPtr->value == val)
-            return false;
+            throw BST_logic_error<T>("This element is already in the tree");
     }
     if (PrevPtr->value > val)
         PrevPtr->left = std::make_shared<Node> (val);
@@ -120,7 +122,7 @@ std::shared_ptr<T> BinarySearchTree<T>::Find(const T& val) const noexcept {
             tmp = tmp->right;
         else return std::make_shared<T> (tmp->value);
     }
-    return nullptr;
+    throw BST_logic_error<T>("This element doesn`t exist");
 }
 
 template <typename T>
@@ -183,7 +185,7 @@ template <typename T>
 bool BinarySearchTree<T>::Compare(std::shared_ptr<Node> ptr1, std::shared_ptr<Node> ptr2) const noexcept {
     if (ptr1 && !ptr2) return false;
     if (!ptr1 && ptr2) return false;
-    if (!ptr1 && !ptr2) return true;
+    if (!ptr1) return true;
     if (ptr1->value == ptr2->value) {
         Compare(ptr1->left, ptr2->left);
         Compare(ptr1->right, ptr2->right);
@@ -224,14 +226,14 @@ void BinarySearchTree<T>::Symmetric(std::ostream& out, std::shared_ptr<Node> roo
 
 template <typename T>
 bool BinarySearchTree<T>::Remove(const T& value) noexcept{
-    return this->Remove(value, Root);
+    return Remove(value, Root);
 }
 
 
 template <typename T>
 bool BinarySearchTree<T>::Remove(const T& value, std::shared_ptr<Node>& ptr) noexcept{
 
-    if (!ptr) return false;
+    if (!ptr) throw BST_logic_error<T>("This element doesn`t exist");
     if (value > ptr->value)
         Remove(value, ptr->right);
     else if (value < ptr->value)
@@ -251,7 +253,8 @@ bool BinarySearchTree<T>::Remove(const T& value, std::shared_ptr<Node>& ptr) noe
             auto LeftSide = ptr->left;
             ptr = ptr->right;
             ptr->left = LeftSide;
-        } else {
+        }
+        else {
             auto bottom = ptr->right;
             while (bottom)
                 bottom = bottom->left;
@@ -297,5 +300,6 @@ std::ifstream& operator >> (std::ifstream& fin, BinarySearchTree<T>& tree) {
     note(fin, tree);
     return fin;
 }
+
 
 #endif //BINARYSEARCHTREE_BINARYSEARCHTREE_H
