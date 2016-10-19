@@ -51,14 +51,14 @@ public:
 
     bool Insert(const T& val);
     bool Compare(std::shared_ptr<Node> ptr1, std::shared_ptr<Node> ptr2) const noexcept;
-    bool Remove(const T& value, std::shared_ptr<Node>& ptr) noexcept;
-    bool Remove(const T& value) noexcept;
+    bool Remove(const T& value, std::shared_ptr<Node>& ptr);
+    bool Remove(const T& value);
 
     void Direct(std::ostream& out, std::shared_ptr<Node> root) const noexcept;
     void Symmetric(std::ostream& out, std::shared_ptr<Node> root) const noexcept;
     void Copy(std::shared_ptr<Node> root, std::shared_ptr<Node> ptr) noexcept;
 
-    std::shared_ptr<T> Find(const T& val) const noexcept;
+    std::shared_ptr<T> Find(const T& val) const;
     std::shared_ptr<Node> ReturnRoot() const noexcept {return Root;}
 
     size_t ReturnSize() const noexcept { return Size;}
@@ -113,7 +113,7 @@ bool BinarySearchTree<T>::Insert(const T& val)  {
 }
 
 template <typename T>
-std::shared_ptr<T> BinarySearchTree<T>::Find(const T& val) const noexcept {
+std::shared_ptr<T> BinarySearchTree<T>::Find(const T& val) const {
     std::shared_ptr<Node> tmp(Root);
     while (tmp) {
         if (tmp->value > val)
@@ -225,13 +225,13 @@ void BinarySearchTree<T>::Symmetric(std::ostream& out, std::shared_ptr<Node> roo
 }
 
 template <typename T>
-bool BinarySearchTree<T>::Remove(const T& value) noexcept{
+bool BinarySearchTree<T>::Remove(const T& value){
     return Remove(value, Root);
 }
 
 
 template <typename T>
-bool BinarySearchTree<T>::Remove(const T& value, std::shared_ptr<Node>& ptr) noexcept{
+bool BinarySearchTree<T>::Remove(const T& value, std::shared_ptr<Node>& ptr){
 
     if (!ptr) throw BST_logic_error<T>("This element doesn`t exist");
     if (value > ptr->value)
