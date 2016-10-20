@@ -70,8 +70,8 @@ public:
 
 
 template <typename T>
-BinarySearchTree<T>::BinarySearchTree(const std::initializer_list<T>& list):Size(0), Root(nullptr){
-    for (auto it : list)
+BinarySearchTree<T>::BinarySearchTree(const std::initializer_list<T>& list):BinarySearchTree(){
+    for (auto& it : list)
         Insert(it);
 }
 
@@ -102,7 +102,7 @@ bool BinarySearchTree<T>::Insert(const T& val)  {
         else if (CurPtr->value < val)
             CurPtr = CurPtr->right;
         else if (CurPtr->value == val)
-            throw BST_logic_error<T>("This element is already in the tree");
+            throw BST_logic_error<T>("This element is already in the tree", val);
     }
     if (PrevPtr->value > val)
         PrevPtr->left = std::make_shared<Node> (val);
@@ -122,7 +122,7 @@ std::shared_ptr<T> BinarySearchTree<T>::Find(const T& val) const {
             tmp = tmp->right;
         else return std::make_shared<T> (tmp->value);
     }
-    throw BST_logic_error<T>("This element doesn`t exist");
+    throw BST_logic_error<T>("This element doesn`t exist", val);
 }
 
 template <typename T>
@@ -233,7 +233,7 @@ bool BinarySearchTree<T>::Remove(const T& value){
 template <typename T>
 bool BinarySearchTree<T>::Remove(const T& value, std::shared_ptr<Node>& ptr){
 
-    if (!ptr) throw BST_logic_error<T>("This element doesn`t exist");
+    if (!ptr) throw BST_logic_error<T>("This element doesn`t exist", value);
     if (value > ptr->value)
         Remove(value, ptr->right);
     else if (value < ptr->value)
