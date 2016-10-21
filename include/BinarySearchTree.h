@@ -48,7 +48,7 @@ public:
     BinarySearchTree(BinarySearchTree<T>&& tree);
     ~BinarySearchTree();
 
-    bool Insert(T& val) noexcept;
+    bool Insert(const T& val) noexcept;
     bool Compare(std::shared_ptr<Node> ptr1, std::shared_ptr<Node> ptr2) const noexcept;
     bool Remove(const T& value, std::shared_ptr<Node>& ptr) noexcept;
     bool Remove(const T& value) noexcept;
@@ -84,7 +84,7 @@ BinarySearchTree<T>::BinarySearchTree(BinarySearchTree<T>&& tree):Size(tree.Size
 }
 
 template <typename T>
-bool BinarySearchTree<T>::Insert(T& val) noexcept {
+bool BinarySearchTree<T>::Insert(const T& val) noexcept {
     if (!Size) {
         Root = std::make_shared <Node> (val);
         Size++;
