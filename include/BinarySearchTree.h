@@ -68,8 +68,8 @@ public:
 };
 
 template <typename T>
-BinarySearchTree<T>::BinarySearchTree(const std::initializer_list<T>& list):Size(0), Root(nullptr){
-    for (auto it : list)
+BinarySearchTree<T>::BinarySearchTree(const std::initializer_list<T>& list):BinarySearchTree(){
+    for (auto& it : list)
         Insert(it);
 }
 
